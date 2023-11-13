@@ -26,7 +26,7 @@ def create_daily_folder(ds):
 def check_if_update(ds):
     parsed_date = datetime.strptime(f"{ds}", "%Y-%m-%d")
     formate_date = parsed_date.strftime("%Y%m%d")
-    new_directotry ="/home/bot-raw/workspace/navi"
+    new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
     os.chdir(new_directotry)
     command_1 = f"""./pyrunner python3/database/token_terminal/generate_index.py \
     check_matrix --date={formate_date}"""
@@ -49,7 +49,7 @@ def update_index(ds):
     data_string = parsed_date.strftime("%Y%m%d")
     if parsed_date >= bound:
         print("current time is:",data_string)
-        new_directotry ="/home/bot-raw/workspace/navi"
+        new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
         os.chdir(new_directotry)
         command = f"""./pyrunner python3/database/token_terminal/generate_index.py \
         get_update_index --date={data_string}"""
@@ -63,7 +63,7 @@ def load_live_data(ds):
     parsed_date = datetime.strptime(f"{ds}", "%Y-%m-%d")
     date_string = parsed_date.strftime("%Y-%m-%d")
     if parsed_date > bound:
-        new_directotry ="/home/bot-raw/workspace/navi"
+        new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
         os.chdir(new_directotry)
         command = f"""./pyrunner python3/database/token_terminal/load_live_data.py \
         load_live_data --date={date_string}"""
@@ -77,7 +77,7 @@ def generate_index(ds):
     parsed_date = datetime.strptime(f"{ds}", "%Y-%m-%d")
     date_string = parsed_date.strftime("%Y%m%d")
     h5_file=f"/remote/iosg/raw-2/buckets/feed.airflow.token_terminal/{date_string}/{date_string}_daily_matrix.h5"
-    new_directotry ="/home/bot-raw/workspace/navi"
+    new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
     os.chdir(new_directotry)
     command = f"""./pyrunner python3/database/token_terminal/generate_matrix.py \
     generate_index_matrix --formate_date={date_string} --h5_file={h5_file}"""
@@ -91,7 +91,7 @@ def generate_matrix(ds):
     date_string = parsed_date.strftime("%Y%m%d")
     date_string1 = parsed_date.strftime("%Y-%m-%d")
     h5_file=f"/remote/iosg/raw-2/buckets/feed.airflow.token_terminal/{date_string}/{date_string}_daily_matrix.h5"
-    new_directotry ="/home/bot-raw/workspace/navi"
+    new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
     os.chdir(new_directotry)
     command = f"""./pyrunner python3/database/token_terminal/generate_matrix.py \
     generate_matrix --formate_date={date_string1} --h5_file={h5_file}"""
@@ -100,7 +100,7 @@ def generate_matrix(ds):
     print(result.stdout)
 
 def send_slack(execution_date):
-    new_directotry ="/home/bot-raw/workspace/navi"
+    new_directotry ="/remote/iosg/home-2/bot-alpha-1/workspace/navi"
     os.chdir(new_directotry)
     time = execution_date.strftime('%Y-%m-%d %H:%M:%S %Z%z')
     print(time)
