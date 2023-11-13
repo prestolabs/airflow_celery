@@ -28,9 +28,9 @@ def check_if_update(ds):
     formate_date = parsed_date.strftime("%Y%m%d")
     new_directotry ="/home/bot-raw/workspace/navi"
     os.chdir(new_directotry)
-    command_1 = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_index.py \
+    command_1 = f"""./pyrunner python3/database/token_terminal/generate_index.py \
     check_matrix --date={formate_date}"""
-    command_2 = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_index.py \
+    command_2 = f"""./pyrunner python3/database/token_terminal/generate_index.py \
     check_project --date={formate_date}"""
     result_1 = subprocess.run(command_1,shell=True,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
     result_2 = subprocess.run(command_2,shell=True,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
@@ -51,7 +51,7 @@ def update_index(ds):
         print("current time is:",data_string)
         new_directotry ="/home/bot-raw/workspace/navi"
         os.chdir(new_directotry)
-        command = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_index.py \
+        command = f"""./pyrunner python3/database/token_terminal/generate_index.py \
         get_update_index --date={data_string}"""
         result=subprocess.run(command,shell=True, check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
         print(result.stderr)
@@ -65,7 +65,7 @@ def load_live_data(ds):
     if parsed_date > bound:
         new_directotry ="/home/bot-raw/workspace/navi"
         os.chdir(new_directotry)
-        command = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/load_live_data.py \
+        command = f"""./pyrunner python3/database/token_terminal/load_live_data.py \
         load_live_data --date={date_string}"""
         print("command is ",command)
         result=subprocess.run(command,shell=True, check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
@@ -79,7 +79,7 @@ def generate_index(ds):
     h5_file=f"/remote/iosg/raw-2/buckets/feed.airflow.token_terminal/{date_string}/{date_string}_daily_matrix.h5"
     new_directotry ="/home/bot-raw/workspace/navi"
     os.chdir(new_directotry)
-    command = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_matrix.py \
+    command = f"""./pyrunner python3/database/token_terminal/generate_matrix.py \
     generate_index_matrix --formate_date={date_string} --h5_file={h5_file}"""
     result=subprocess.run(command,shell=True,check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE, universal_newlines=True)
     print(result.stderr)
@@ -93,7 +93,7 @@ def generate_matrix(ds):
     h5_file=f"/remote/iosg/raw-2/buckets/feed.airflow.token_terminal/{date_string}/{date_string}_daily_matrix.h5"
     new_directotry ="/home/bot-raw/workspace/navi"
     os.chdir(new_directotry)
-    command = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_matrix.py \
+    command = f"""./pyrunner python3/database/token_terminal/generate_matrix.py \
     generate_matrix --formate_date={date_string1} --h5_file={h5_file}"""
     result=subprocess.run(command,shell=True, check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
     print(result.stderr)
@@ -104,7 +104,7 @@ def send_slack(execution_date):
     os.chdir(new_directotry)
     time = execution_date.strftime('%Y-%m-%d %H:%M:%S %Z%z')
     print(time)
-    command = f"""conda run -n coin2_motion_env_migration ./pyrunner python3/database/token_terminal/generate_index.py \
+    command = f"""./pyrunner python3/database/token_terminal/generate_index.py \
     send_slack """
     result=subprocess.run(command,shell=True, check=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,universal_newlines=True)
 
