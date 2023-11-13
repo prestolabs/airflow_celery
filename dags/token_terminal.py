@@ -117,25 +117,39 @@ with DAG(
     start_date=datetime(2023, 11, 1)
 ) as dag:
     create_daily_folder = PythonOperator(
-        task_id="create_daily_folder", python_callable=create_daily_folder
+        task_id="create_daily_folder", 
+        queue = "token_terminal_1",
+        python_callable=create_daily_folder
     )
     check_if_update = PythonOperator(
-        task_id="check_if_update", python_callable=check_if_update
+        task_id="check_if_update", 
+        queue = "token_terminal_1",
+        python_callable=check_if_update
     )
     update_index = PythonOperator(
-        task_id="update_index", python_callable=update_index
+        task_id="update_index", 
+        queue = "token_terminal_1",
+        python_callable=update_index
     )
     load_live_data = PythonOperator(
-        task_id="load_live_data", python_callable=load_live_data
+        task_id="load_live_data", 
+        queue = "token_terminal_1",
+        python_callable=load_live_data
     )
     generate_index = PythonOperator(
-        task_id="generate_index", python_callable=generate_index
+        task_id="generate_index", 
+        queue = "token_terminal_1",
+        python_callable=generate_index
     )
     generate_matrix = PythonOperator(
-        task_id="generate_matrix", python_callable=generate_matrix
+        task_id="generate_matrix", 
+        queue = "token_terminal_1",
+        python_callable=generate_matrix
     )
     send_slack = PythonOperator(
-        task_id = "send_slack",python_callable=send_slack
+        task_id = "send_slack",
+        queue = "token_terminal_1",
+        python_callable=send_slack
     )
 
     start = DummyOperator(task_id="start")
